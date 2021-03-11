@@ -12,18 +12,15 @@ type helloHandler struct {
 }
 
 // NewHelloHandler returns hello handler.
-func NewHelloHandler() *helloHandler {
-	return &helloHandler{}
+func NewHelloHandler(svc hex.HelloService) *helloHandler {
+	return &helloHandler{svc: svc}
 }
 
 func (h *helloHandler) Routes(g *echo.Group) {
 	g.GET("/hello", h.sayHello)
-	g.GET("/test", func(c echo.Context) error {
-		return c.JSON(http.StatusOK, "Hello, World!")
-	})
 }
 
 func (h *helloHandler) sayHello(e echo.Context) error {
-	// args := hex.HelloArgs{Name: e.Param("name")}
-	return e.JSON(http.StatusOK, "hello "+e.QueryParam("name"))
+	args := hex.HelloArgs{Name: e.QueryParam("name")}
+	return e.JSON(http.StatusOK, h.svc.SayHello(args))
 }

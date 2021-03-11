@@ -1,13 +1,17 @@
 package service
 
-import "fmt"
+import (
+	hex "github.com/roppa/hexaganol"
+)
 
-// NewMessage generates a hello message
-func NewMessage(args HelloArgs) HelloResponse {
-	fmt.Println("= NewMessage ==============================================================")
-	fmt.Println("===============================================================")
-	fmt.Println(args)
-	fmt.Println("===============================================================")
-	fmt.Println("===============================================================")
-	return HelloResponse{Message: "Hello " + args.Name}
+type hello struct{}
+
+// NewService creates a new hello service
+func NewService() *hello {
+	return &hello{}
+}
+
+// SayHello generates a hello message
+func (h *hello) SayHello(args hex.HelloArgs) hex.HelloResponse {
+	return hex.HelloResponse{Message: "Hello " + args.Name}
 }
