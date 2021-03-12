@@ -2,8 +2,8 @@ package main
 
 import (
 	"github.com/labstack/echo"
+	shttp "github.com/roppa/hexaganol/io/http"
 	"github.com/roppa/hexaganol/service"
-	shttp "github.com/roppa/hexaganol/transports/http"
 )
 
 func main() {
